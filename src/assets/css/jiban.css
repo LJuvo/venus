@@ -1,0 +1,25 @@
+.jiban {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.jiban-content {
+    flex: 1;
+}
+
+.jiban-right {
+    padding: 5px;
+}
+
+.jiban-right-item {
+    position: relative;
+}
+
+.jiban-right-item>img {
+    border-radius: 50px;
+    width: 40px;
+}

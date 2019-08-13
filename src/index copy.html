@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .venus {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .venus-header {
+            height: 50px;
+            /* background: #ff0000; */
+            -webkit-app-region: drag;
+        }
+        
+        .venus-wrapper {
+            flex: 1;
+            overflow: hidden;
+            overflow-y: auto;
+            /* background: #fefefe; */
+        }
+        
+        .venus-footer {
+            height: 49px;
+            border-top: 1px solid #cccccc;
+            background: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="venus">
+        <header class="venus-header">header</header>
+        <section class="venus-wrapper">
+            <p>info</p>
+            <div id="test"></div>
+            <div id="mars" style="width: 100%;height: 200px;"></div>
+            <h1>hello</h1>
+            <Button onclick="changeWin()">刷新</Button>
+            <Button onclick="changeWinMin()">最小化</Button>
+            <Button onclick="changeWinMax(true)">最大化</Button>
+            <Button onclick="changeWinMax(false)">恢复</Button>
+        </section>
+        <footer class="venus-footer">
+            footer
+        </footer>
+    </div>
+</body>
+
+<script>
+    import Vue from "vue";
+    import Test from "./test";
+    // import MARS from "./mars/mars";
+    import * as d3 from "d3";
+
+    import WindowUtil from "./utils/WindowUtil";
+
+    // const app = new Vue(Test).$mount('.venus');
+
+    // app.text = "Electron Forge with Vue.js!";
+    // app.button = "刷新";
+
+    // let mars = new MARS();
+    // mars.APP("mars", true);
+    var i = 0;
+    let sampleData = new Array(26).fill(undefined).map(function() {
+        i += 1;
+        return {
+            key: String.fromCharCode(64 + i),
+            value: Math.random() * 80 + 10
+        };
+    });
+
+    var margin = {
+        top: 20,
+        left: 40,
+        bottom: 20,
+        right: 0
+    };
+
+    const marsWidth = document.getElementById("mars").offsetWidth;
+    const marsHeight = document.getElementById("mars").offsetHeight;
+    var barChart = d3
+        .select("#mars")
+        .append("svg")
+        .attr("width", marsWidth)
+        .attr("height", marsHeight);
+
+    var width = barChart.attr("width") - margin.left - margin.right;
+    var height = barChart.attr("height") - margin.top - margin.bottom;
+
+    var xScale = d3
+        .scaleBand()
+        .domain(
+            sampleData.map(function(d) {
+                return d.key;
+            })
+        )
+        .range([0, width])
+        .padding(0.5);
+
+    // 生成y轴比例尺
+    var maxValue = d3.max(sampleData, function(d) {
+        // 获取数据源最大值
+        return d.value;
+    });
+
+    yScale = d3
+        .scaleLinear()
+        .domain([0, maxValue])
+        .range([height, 0]);
+
+    // 根据x轴比例尺生成x轴坐标系
+    var xAxis = d3.axisBottom(xScale);
+    // 根据y轴比例尺生成y轴坐标系
+    var yAxis = d3.axisLeft(yScale);
+
+    // 绘制坐标轴
+    barChart
+        .append("g")
+        .attr("class", "x-axis")
+        .attr(
+            "transform",
+            "translate(" + margin.left + "," + (margin.top + height) + ")"
+        )
+        .call(xAxis);
+
+    barChart
+        .append("g")
+        .attr("class", "y-axis")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+        .call(yAxis);
+
+    // 绘制矩形
+    barChart
+        .append("g")
+        .attr("class", "bars")
+        .selectAll("rect")
+        .data(sampleData)
+        .enter()
+        .append("rect")
+        .attr("width", xScale.bandwidth())
+        .attr("x", function(d) {
+            return xScale(d.key);
+        })
+        .attr("y", function(d) {
+            return yScale(d.value);
+        })
+        .attr("height", function(d) {
+            return height - yScale(d.value);
+        })
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+        .attr("fill", "steelblue");
+
+    function changeWin() {
+        WindowUtil.minWindow();
+        console.log("refresh");
+    }
+
+    function changeWinMin() {
+        WindowUtil.minWindow();
+    }
+
+    function changeWinMax(val) {
+        WindowUtil.maxWindow(val);
+    }
+</script>
+
+</html>
