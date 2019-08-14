@@ -2,18 +2,29 @@
   <div class="jiban">
     <div class="jiban-content"></div>
     <div class="jiban-right">
+      <!-- <div class="jiban-right-btn">
+        <button id="manage-window">弹窗</button>
+        <div class="jiban-right-item">
+          <img :src="'./assets/story/basic/'+selectImg+'.jpg'" />
+        </div>
+      </div>
+      <div class="jiban-right-pane">-->
       <div class="jiban-right-item" v-for="(item,key) in perArr" :key="key">
         <img :src="'./assets/story/basic/'+item.img+'.jpg'" />
       </div>
+      <!-- </div> -->
     </div>
   </div>
 </template>
 
 <script>
+const BrowserWindow = require("electron").remote.BrowserWindow;
+const path = require("path");
 export default {
   name: "story",
   data() {
     return {
+      selectImg: "yuansushi",
       perArr: [
         {
           label: "元素使",
@@ -44,6 +55,43 @@ export default {
         { label: "游侠", img: "youxia" }
       ]
     };
+  },
+  mounted() {
+    //已下为插入内容
+
+    const manageWindowBtn = document.getElementById("manage-window");
+
+    manageWindowBtn.addEventListener("click", function(event) {
+      const modalPath = path.join(
+        "file://",
+        __dirname,
+        "../../views/story.html"
+      );
+      let win = new BrowserWindow({
+        width: 400,
+        height: 275,
+        // transparent: true,
+        // frame: false,
+        useContentSize: true
+      });
+
+      win.on("resize", updateReply);
+      win.on("move", updateReply);
+      win.on("close", function() {
+        win = null;
+      });
+      win.loadURL(modalPath);
+      win.show();
+
+      function updateReply() {
+        const manageWindowReply = document.getElementById(
+          "manage-window-reply"
+        );
+        const message = `Size: ${win.getSize()} Position: ${win.getPosition()}`;
+
+        manageWindowReply.innerText = message;
+      }
+    });
   }
 };
 </script>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="./assets/css/basic.css" />
+    <link rel="stylesheet" href="./assets/css/jiban.css" />
+    <link rel="stylesheet" href="./assets/css/story.css" />
+    <style></style>
+</head>
+
+<body>
+    <div class="lol">
+        <div class="lol-top">
+            <div class="lol-top-drag"></div>
+            <div class="lol-top-item" onclick="changeMesh('zhongzu');">种族</div>
+            <div class="lol-top-item" onclick="changeMesh('jiban');">羁绊</div>
+            <div class="lol-top-item" onclick="changeMesh('zhenrong');">阵容</div>
+            <div class="lol-top-item" onclick="changeMesh('yingxiong');">英雄</div>
+            <div class="lol-top-item" onclick="changeMesh('zhuangbei');">装备</div>
+        </div>
+        <div class="lol-main"></div>
+    </div>
+</body>
+
+<script>
+    import Vue from "vue";
+    import Story from "../components/story";
+    import Jiban from "../components/story/jiban";
+    let app = new Vue(Story).$mount(".lol-main");
+
+    changeMesh("zhongzu");
+
+    function changeMesh(val) {
+        app.text = val;
+    }
+</script>
+
+</html>
