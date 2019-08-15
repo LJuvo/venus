@@ -15,20 +15,25 @@ const createWindow = async() => {
     mainWindow = new BrowserWindow({
         // width: 960,
         // height: 650,
-        width: 400,
-        height: 400,
+        width: 100,
+        height: 100,
         transparent: true,
         frame: false,
         useContentSize: true,
         alwaysOnTop: true //窗口是否总是显示在其他窗口之前
     });
 
-    // const size = screen.getPrimaryDisplay().workAreaSize; //获取显示器的宽高
-    // const winSize = mainWindow.getSize(); //获取窗口宽高
-    // //设置窗口的位置 注意x轴要桌面的宽度 - 窗口的宽度
-    // mainWindow.setPosition(size.width - winSize[0] - 20, size.height - winSize[1] - 20);
+    const size = screen.getPrimaryDisplay().workAreaSize; //获取显示器的宽高
+    const winSize = mainWindow.getSize(); //获取窗口宽高
+    //设置窗口的位置 注意x轴要桌面的宽度 - 窗口的宽度
+    mainWindow.setPosition(
+        // size.width - winSize[0] - 20,
+        // size.height - winSize[1] - 20
+        20,
+        20
+    );
 
-    mainWindow.loadURL(`file://${__dirname}/index.html`);
+    mainWindow.loadURL(`file://${__dirname}/tools.html`);
 
     // Open the DevTools.
     if (isDevMode) {
