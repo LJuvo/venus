@@ -37,8 +37,8 @@
             "electronInstallerDebian": {},
             "electronInstallerRedhat": {},
             "github_repository": {
-                "owner": "",
-                "name": ""
+                "owner": "LJuvo",
+                "name": "https://5b16b6f6701bd5a12e953d0db70adbe3f581a708@github.com/LJuvo/venus.git"
             },
             "windowsStoreConfig": {
                 "packageName": "",

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="./assets/css/basic.css" />
+    <style>
+        .card {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            /* background:  */
+        }
+        
+        .card-pane {
+            flex: 1;
+            -webkit-app-region: drag;
+            font-size: 12px;
+        }
+        
+        .card-pane-title {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        
+        .card-list-pane {
+            width: 80px;
+            height: 100%;
+            text-align: center;
+            overflow: hidden;
+            overflow-y: auto;
+        }
+        
+        .card-list {
+            padding: 10px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        
+        .card-list-item {
+            margin: 5px;
+            /* width: 30px;
+            height: 30px;
+            line-height: 30px;
+            border: 2px solid #4cb81d;
+            background: #96d42c;
+            border-radius: 50%;
+            display: block; */
+            align-content: center;
+            text-align: center;
+            position: relative;
+        }
+        
+        .card-list-item-abs {
+            position: absolute;
+            right: 80px;
+            top: 0;
+            z-index: 99;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+        }
+        /* .card-list-item:hover .card-list-item-abs {
+            display: block;
+        } */
+        
+        .card-list-item>img {
+            display: inline-block;
+            vertical-align: middle;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            /* margin-top: 8px; */
+        }
+        
+        .weapon-basic-img {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin: 5px;
+        }
+        
+        .weapon-main-img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+        
+        .weapon-check-img {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin: 5px;
+        }
+        
+        .card-list-item>img:hover {
+            /* border-color: #ffffff;
+            background: #ffffff;
+            background-position: -191px 0;
+            color: #ff4e00; */
+            box-shadow: 0 0 25px #ffba00;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tools"></div>
+</body>
+
+<script>
+    import Vue from "vue";
+    import Weapon from "./components/story/weapon";
+    let app = new Vue(Weapon).$mount(".tools");
+</script>
+
+</html>

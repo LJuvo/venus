@@ -15,7 +15,46 @@ body {
 .tools-pane {
     width: 100%;
     height: 100%;
-    background: rgba(30, 30, 30, 1);
+    /* background: rgba(30, 30, 30, 1); */
+    background: url("../bob/bg.png") no-repeat;
+    background-size: 100% auto;
+    display: grid;
+    grid-template-rows: 28% auto;
+}
+
+.tools-pane-drag {
+    width: 100%;
+    height: 100%;
+    -webkit-app-region: drag;
+}
+
+.tools-wrapper {
+    padding: 10px 20px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-auto-rows: 30px;
+    font-size: 10px;
+    text-align: center;
+}
+
+.tools-btn {
+    background: url("../bob/btn0.png") no-repeat;
+    background-size: 100% 100%;
+    display: block;
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    cursor: pointer;
+    cursor: hand;
+    margin: 2px auto;
+}
+
+.tools-btn:hover {
+    background-image: url("../bob/btn1.png");
+}
+
+.tools-btn:active {
+    background-image: url("../bob/btn2.png");
 }
 
 ::-webkit-scrollbar {

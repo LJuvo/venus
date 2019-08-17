@@ -1,4 +1,4 @@
-import { app, screen, BrowserWindow } from "electron";
+import { app, screen, BrowserWindow, ipcMain } from "electron";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import { enableLiveReload } from "electron-compile";
 
@@ -15,8 +15,8 @@ const createWindow = async() => {
     mainWindow = new BrowserWindow({
         // width: 960,
         // height: 650,
-        width: 100,
-        height: 100,
+        width: 200,
+        height: 200,
         transparent: true,
         frame: false,
         useContentSize: true,
@@ -50,6 +50,7 @@ const createWindow = async() => {
 
     // mainWindow.setIgnoreMouseEvents(true)
 };
+ipcMain.on("close", e => mainWindow.close());
 
 app.on("ready", createWindow);
 
